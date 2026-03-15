@@ -1,13 +1,13 @@
 # Math + Systems — Interactive Learning Visualization
 
 Interactive visual guide to the math and systems programming behind the
-dgCMatrix → faer FFI bridge. Blocks, wires, minimal words.
+[dgCMatrix → faer FFI bridge](https://github.com/shinigami-777/dgcmatrix-faer-bridge).
 
 ## What's here
 
 - `index.html` — the page (loads CSS + JS from CDN and local files)
 - `style.css` — layout and design tokens (dark/light theme)
-- `math-systems.js` — all 7 interactive canvas visualizations + CG solver
+- `math-systems.js` — 7 interactive canvas visualizations + CG solver
 
 ## Sections
 
@@ -26,7 +26,7 @@ Every canvas can be exported as a high-res PNG for papers. Open the
 browser console and run:
 
 ```js
-// Export any canvas by ID — e.g. the FFI boundary diagram
+// Export any canvas by ID — e.g., the FFI boundary diagram
 const c = document.getElementById("ffi-canvas");
 const link = document.createElement("a");
 link.download = "ffi-boundary.png";
@@ -42,6 +42,9 @@ For higher resolution, the canvases already render at devicePixelRatio
 (2x on Retina). For even higher, temporarily set
 `window.devicePixelRatio = 4` before calling `drawAll()` in the console,
 then export.
+
+## dgcmatrix-faer-bridge
+https://github.com/shinigami-777/dgcmatrix-faer-bridge
 
 ## Live version
 
