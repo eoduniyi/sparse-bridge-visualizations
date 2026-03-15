@@ -52,8 +52,3 @@ High-res tips:
 
 - Already HiDPI-aware (2x on Retina)
 - For 4K/print quality, set `window.devicePixelRatio = 4` then call `drawAll()` before exporting
-
-## Links
-
-- Crate: [dgcmatrix-faer-bridge](https://github.com/shinigami-777/dgcmatrix-faer-bridge)
-- Live: [Math Systems Interactive](https://letters-photon-processor.web.app/math-systems)
