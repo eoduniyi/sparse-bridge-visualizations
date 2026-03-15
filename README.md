@@ -2,7 +2,6 @@
 
 Interactive visual guides to the math and systems programming behind the
 [dgCMatrix → faer FFI bridge](https://github.com/shinigami-777/dgcmatrix-faer-bridge).
-A high-fidelity exploration of sparse matrix mechanics, spectral filtering, and FFI memory layouts.
 
 ## What's here
 
