@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Math × Systems — Visual Learning Map</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header id="header">
+      <div class="brand">
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="white" opacity="0.9"/><circle cx="12" cy="12" r="8" fill="none" stroke="white" stroke-width="1.5" opacity="0.5"/></svg>
+        </div>
+        <div>
+          <h1>Math × Systems</h1>
+          <span class="subtitle">blocks · wires · code</span>
+        </div>
+      </div>
+      <nav>
+        <button id="theme-toggle">Light</button>
+      </nav>
+    </header>
+
+    <div id="scroll-layout">
+
+      <section class="section">
+        <div class="section-label">The Pipeline</div>
+        <canvas id="pipeline-canvas" width="900" height="200"></canvas>
+      </section>
+
+      <section class="section">
+        <div class="section-label">I. Vectors in Memory</div>
+        <div class="block-row">
+          <div class="block-viz">
+            <canvas id="vec-canvas" width="500" height="280"></canvas>
+          </div>
+          <div class="block-math">
+            <div class="eq-box" id="eq-vec"></div>
+            <div class="micro">contiguous f64 × 4 = 32 bytes</div>
+            <div class="wire-label">← same object, two views →</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-label">II. Sparse vs Dense</div>
+        <div class="block-row">
+          <div class="block-viz">
+            <canvas id="sparse-canvas" width="520" height="300"></canvas>
+          </div>
+          <div class="block-math">
+            <div class="eq-box" id="eq-sparse"></div>
+            <div class="micro">12 non-zeros / 16 entries = 75% sparse</div>
+            <div class="stat-row">
+              <div class="stat"><span class="stat-val">128</span><span class="stat-unit">bytes dense</span></div>
+              <div class="stat"><span class="stat-val">156</span><span class="stat-unit">bytes CSC</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-label">III. Graph → Laplacian</div>
+        <div class="block-row">
+          <div class="block-viz">
+            <canvas id="graph-canvas" width="400" height="300"></canvas>
+            <div class="grid-controls">
+              <button id="btn-grid3" class="active">3×3</button>
+              <button id="btn-grid4">4×4</button>
+              <button id="btn-grid5">5×5</button>
+            </div>
+          </div>
+          <div class="block-math">
+            <div class="eq-box" id="eq-laplacian"></div>
+            <div class="eq-box" id="eq-laplacian2"></div>
+            <div class="stat-row">
+              <div class="stat"><span class="stat-val" id="node-count">9</span><span class="stat-unit">nodes</span></div>
+              <div class="stat"><span class="stat-val" id="edge-count">12</span><span class="stat-unit">edges</span></div>
+              <div class="stat"><span class="stat-val" id="nnz-count">33</span><span class="stat-unit">nnz</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-label">IV. Iterative Solve</div>
+        <div class="block-row">
+          <div class="block-viz">
+            <canvas id="cg-canvas" width="500" height="300"></canvas>
+            <div class="ctrl-row">
+              <span class="lbl">α</span>
+              <input type="range" id="alpha-slider" min="0.01" max="2" step="0.01" value="0.5">
+              <span class="val" id="alpha-val">0.50</span>
+            </div>
+          </div>
+          <div class="block-math">
+            <div class="eq-box" id="eq-cg"></div>
+            <div class="eq-box" id="eq-cg2"></div>
+            <div class="micro">each iteration = one SpMV = O(nnz)</div>
+            <div class="stat-row">
+              <div class="stat"><span class="stat-val" id="cg-iters">—</span><span class="stat-unit">CG iterations</span></div>
+              <div class="stat"><span class="stat-val" id="cg-residual">—</span><span class="stat-unit">residual</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-label">V. The Boundary</div>
+        <canvas id="ffi-canvas" width="900" height="320"></canvas>
+      </section>
+
+      <section class="section">
+        <div class="section-label">VI. Spectral View</div>
+        <div class="block-row">
+          <div class="block-viz">
+            <canvas id="eigen-canvas" width="500" height="280"></canvas>
+          </div>
+          <div class="block-math">
+            <div class="eq-box" id="eq-eigen"></div>
+            <div class="eq-box" id="eq-filter"></div>
+            <div class="micro">low λ → pass · high λ → suppress</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-label">VII. Why It Matters</div>
+        <canvas id="complexity-canvas" width="900" height="280"></canvas>
+        <div class="eq-box" id="eq-complexity" style="margin-top:16px;"></div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js"></script>
+  <script src="math-systems.js"></script>
+</body>
+</html>

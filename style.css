@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap");
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a12;
+  --bg-gradient: radial-gradient(ellipse at 15% 50%, rgba(232,67,147,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 15%, rgba(116,185,255,0.08) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 50%, rgba(30,25,55,1) 0%, rgba(10,10,18,1) 100%);
+  --surface: rgba(18,18,30,0.82); --surface-solid: #111120;
+  --border: rgba(255,255,255,0.06); --text: #e2e0ef; --text-dim: #9a96b8; --text-muted: #5e5a78;
+  --accent: #e84393; --accent-soft: rgba(232,67,147,0.12); --accent-glow: rgba(232,67,147,0.3);
+  --warm: #e17055; --cool: #74b9ff; --green: #00b894;
+  --font: "Inter", -apple-system, sans-serif; --mono: "JetBrains Mono", "SF Mono", monospace;
+  --radius: 20px; --glass-border: rgba(255,255,255,0.08);
+  --shadow-card: 0 2px 16px rgba(0,0,0,0.3); --shadow-soft: 0 4px 32px rgba(0,0,0,0.4);
+  --viewport-bg: linear-gradient(145deg, #0e0e1a, #141422);
+  --toggle-bg: rgba(255,255,255,0.04); --eq-bg: rgba(255,255,255,0.03); --slider-thumb: #1a1a2e;
+}
+[data-theme="light"] {
+  --bg: #f0f2f5;
+  --bg-gradient: radial-gradient(ellipse at 20% 50%, rgba(232,67,147,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(116,185,255,0.06) 0%, transparent 50%);
+  --surface: rgba(255,255,255,0.72); --surface-solid: #ffffff;
+  --border: rgba(0,0,0,0.06); --text: #1a1a2e; --text-dim: #555770; --text-muted: #9ca3af;
+  --glass-border: rgba(255,255,255,0.3);
+  --shadow-card: 0 2px 12px rgba(0,0,0,0.04); --shadow-soft: 0 4px 24px rgba(0,0,0,0.06);
+  --viewport-bg: linear-gradient(145deg, #eaecf0, #f5f7fa);
+  --toggle-bg: rgba(0,0,0,0.04); --eq-bg: rgba(0,0,0,0.025); --slider-thumb: #ffffff;
+}
+html, body { height: 100%; overflow: hidden; background: var(--bg); background-image: var(--bg-gradient);
+  color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; transition: background-color 0.4s, color 0.3s; }
+#app { height: 100vh; display: flex; flex-direction: column; padding: 14px; gap: 10px; }
+#header { display: flex; align-items: center; justify-content: space-between; padding: 12px 22px;
+  background: var(--surface); backdrop-filter: blur(20px); border: 1px solid var(--glass-border);
+  border-radius: var(--radius); box-shadow: var(--shadow-soft); }
+#header .brand { display: flex; align-items: center; gap: 12px; }
+#header .brand .icon { width: 30px; height: 30px; border-radius: 10px;
+  background: linear-gradient(135deg, #e84393, #fd79a8); display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 14px var(--accent-glow); }
+#header .brand .icon svg { width: 16px; height: 16px; }
+#header h1 { font-size: 14px; font-weight: 600; color: var(--text); }
+#header .subtitle { font-size: 11px; color: var(--text-muted); }
+#header nav { display: flex; gap: 6px; }
+#theme-toggle { font-size: 11px; color: var(--accent); font-weight: 500; padding: 6px 14px;
+  border-radius: 20px; background: var(--accent-soft); border: none; cursor: pointer; font-family: var(--font); transition: all 0.25s; }
+#theme-toggle:hover { background: linear-gradient(135deg, #e84393, #fd79a8); color: white; }
+#scroll-layout { flex: 1; overflow-y: auto; padding: 0 14px 40px; display: flex; flex-direction: column; gap: 20px; }
+#scroll-layout::-webkit-scrollbar { width: 3px; }
+#scroll-layout::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+.section { background: var(--surface); backdrop-filter: blur(20px); border: 1px solid var(--glass-border);
+  border-radius: var(--radius); box-shadow: var(--shadow-card); padding: 20px 24px; transition: all 0.3s; }
+.section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent);
+  font-weight: 600; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.block-row { display: flex; gap: 24px; align-items: flex-start; }
+.block-viz { flex: 1.2; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.block-math { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.block-viz canvas, .section > canvas { width: 100%; background: var(--viewport-bg); border-radius: 12px;
+  border: 1px solid var(--glass-border); display: block; }
+.eq-box { background: var(--eq-bg); border-radius: 10px; padding: 10px 14px; overflow-x: auto; }
+.eq-box .katex { font-size: 14px; }
+.micro { font-size: 10px; font-family: var(--mono); color: var(--text-muted); letter-spacing: 0.5px; }
+.wire-label { font-size: 10px; color: var(--accent); text-align: center; font-family: var(--mono); opacity: 0.7; }
+.stat-row { display: flex; gap: 16px; flex-wrap: wrap; }
+.stat { display: flex; flex-direction: column; gap: 2px; }
+.stat-val { font-size: 18px; font-weight: 600; font-family: var(--mono); color: var(--accent); }
+.stat-unit { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+.ctrl-row { display: flex; align-items: center; gap: 10px; width: 100%; }
+.ctrl-row .lbl { font-size: 11px; color: var(--text-dim); min-width: 20px; font-weight: 500; }
+.ctrl-row .val { font-size: 11px; font-family: var(--mono); color: var(--accent); min-width: 36px; text-align: right; }
+input[type="range"] { -webkit-appearance: none; appearance: none; flex: 1; height: 4px; border-radius: 2px;
+  background: var(--toggle-bg); outline: none; }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--slider-thumb); box-shadow: 0 1px 6px rgba(0,0,0,0.3), 0 0 0 2px var(--accent); cursor: pointer; }
+.grid-controls { display: flex; gap: 6px; }
+.grid-controls button { padding: 5px 12px; border: 1px solid var(--glass-border); background: var(--toggle-bg);
+  color: var(--text-muted); border-radius: 8px; font-size: 10px; cursor: pointer; font-family: var(--font); transition: all 0.2s; }
+.grid-controls button.active { background: var(--accent); color: white; border-color: var(--accent); }
+.katex { color: var(--text); }
+@media (max-width: 700px) {
+  .block-row { flex-direction: column; }
+  #header { flex-direction: column; gap: 8px; padding: 12px 16px; }
+  .section { padding: 14px 12px; }
+  .stat-val { font-size: 14px; }
+}
