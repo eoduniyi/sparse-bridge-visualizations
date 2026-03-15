@@ -1,51 +1,60 @@
-# Math + Systems — Interactive Learning Visualization
+# sparse-bridge-visualization
 
-Interactive visual guide to the math and systems programming behind the
+Interactive visual guides to the math and systems programming behind the
 [dgCMatrix → faer FFI bridge](https://github.com/shinigami-777/dgcmatrix-faer-bridge).
+A high-fidelity exploration of sparse matrix mechanics, spectral filtering, and FFI memory layouts.
 
 ## What's here
 
-- `index.html` — the page (loads CSS + JS from CDN and local files)
-- `style.css` — layout and design tokens (dark/light theme)
-- `math-systems.js` — 7 interactive canvas visualizations + CG solver
+- `index.html` — the main interface (loads KaTeX and local assets)
+- `style.css` — glassmorphic design tokens and dark/light theme logic
+- `math-systems.js` — core engine: 8 interactive visualizations + CG solver
+
+## How to run
+
+Serve the folder locally so fonts and icons load correctly:
+
+```bash
+# Python
+python3 -m http.server
+
+# Node
+npx serve .
+```
 
 ## Sections
 
-1. **Pipeline** — R → FFI → Rust → CG → smoothed (wire diagram)
-2. **Vectors in Memory** — math view vs byte-level memory layout
-3. **Sparse vs Dense** — 4×4 Laplacian as dense grid vs CSC arrays
-4. **Graph → Laplacian** — interactive grid (3×3, 4×4, 5×5) with live stats
-5. **Iterative Solve** — CG solver with convergence plot, alpha slider
-6. **FFI Boundary** — R slots → type conversion → Rust components
-7. **Spectral View** — filter response h(λ) = 1/(1+αλ)
-8. **Complexity** — O(N³) vs O(N^1.5) vs O(N) curves
+1. **Pipeline** — architectural flow: R → FFI → Rust → CG solver
+2. **Vectors in Memory** — mathematical notation vs. contiguous `f64` byte layout
+3. **Sparse vs Dense** — CSC (Compressed Sparse Column) memory efficiency
+4. **Graph → Laplacian** — real-time Laplacian construction from interactive grids
+5. **Iterative Solve** — Conjugate Gradient solver with live convergence plotting
+6. **FFI Boundary** — safety mapping between R slots and Rust types
+7. **Spectral View** — low-pass filter response h(λ) = 1/(1+αλ) with real eigenvalue spikes
+8. **Complexity** — O(N³) dense vs. O(N) sparse CG
 
-## Export figures for LaTeX
+## Exporting figures for LaTeX
 
-Every canvas can be exported as a high-res PNG for papers. Open the
-browser console and run:
+Every visualization renders to an HTML5 Canvas and can be exported as a high-res PNG.
+Open the browser console and run:
 
 ```js
-// Export any canvas by ID — e.g., the FFI boundary diagram
 const c = document.getElementById("ffi-canvas");
 const link = document.createElement("a");
-link.download = "ffi-boundary.png";
+link.download = "figure-export.png";
 link.href = c.toDataURL("image/png");
 link.click();
 ```
 
 Canvas IDs: `pipeline-canvas`, `vec-canvas`, `sparse-canvas`,
-`graph-canvas`, `cg-canvas`, `ffi-canvas`, `eigen-canvas`,
-`complexity-canvas`
+`graph-canvas`, `cg-canvas`, `ffi-canvas`, `eigen-canvas`, `complexity-canvas`
 
-For higher resolution, the canvases already render at devicePixelRatio
-(2x on Retina). For even higher, temporarily set
-`window.devicePixelRatio = 4` before calling `drawAll()` in the console,
-then export.
+High-res tips:
 
-## dgcmatrix-faer-bridge
-https://github.com/shinigami-777/dgcmatrix-faer-bridge
+- Already HiDPI-aware (2x on Retina)
+- For 4K/print quality, set `window.devicePixelRatio = 4` then call `drawAll()` before exporting
 
-## Live version
+## Links
 
-https://letters-photon-processor.web.app/math-systems
+- Crate: [dgcmatrix-faer-bridge](https://github.com/shinigami-777/dgcmatrix-faer-bridge)
+- Live: [Math Systems Interactive](https://letters-photon-processor.web.app/math-systems)
